@@ -1,0 +1,44 @@
+Jenkikns set up.
+
+PRE-REQUISITES:
+
+$which java 
+$cat /etc/services | grep 8080
+$telnet localhost 8080  ( easiest way to check if its running anything or listening on that port ) 
+$yum install telnet 
+$telnet localhost 8080 ( conn refused ) 
+$nmap -sT -O localhost  ( scans the OS and what happens to be running.. kernal version that we have  and as well as open and listening service ports on our system ) 
+
+$netstat -anp ( lists all the ports on the system ) 
+$netstat -anp | grep 8080   ( nothing is running now  )
+#download java from oracle and now install java 
+$rpm -ivh jdk-8u25-linux-x64.rpm   ( installing java ) 
+which java 
+/bin/java
+
+# lets use /etc/alternatives version of java 
+cd /usr/java # look at the default 
+# lets set up alternatives
+alternatives --install /usr/bin/java java /usr/java/latest/bin/java 200000 # the number so it associates it with
+alternatives --install /usr/bin/javac javac /usr/java/latest/bin/javac 200000 # the number so it associates it with
+alternatives --install /usr/bin/jar jar /usr/java/latest/bin/jar 200000 # the number so it associates it with
+alternatives --config java
+There is 1 program that provides `java` 
+
+# we repeat that for the number of alternatives that we set up 
+javac -version 
+javac 1.8.0_25
+
+cd /etc/rc.d
+echo export JAVA_HOME="/usr/java/latest  >> rc.local
+
+DOWNLOAD and INSTALL JENKINS:
+
+$ yum install wget
+$ sudo wget -o /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat/jenkins.repo
+$  rpm --import https://jenkins-ci.org/redhat/jenkins-ci.org.key
+$ yum update 
+$ yum install jenkins
+$ systemctl enable jenkins.service
+$ systemctl restart jenkins.service
+# Now go to the public IP of the server:8080 on a web browser. Voila the jenkins is up. 
