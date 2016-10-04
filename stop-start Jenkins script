@@ -1,9 +1,10 @@
-Start & Stop Scripts for Jenkins 
-
 Stop Jenkins Script --- cat stop.sh
 
 #!/bin/bash
 kill -9 $(ps -ef |grep -i jenkins | grep -i java | grep -iv grep | awk '{print $2}')
+
+
+----------------------------------------------------------------------------------------------
 
 Start Jenkins script ---cat start.sh
 
