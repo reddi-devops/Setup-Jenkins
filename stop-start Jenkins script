@@ -1,7 +1,7 @@
 Stop Jenkins Script --- cat stop.sh
 
 #!/bin/bash
-kill -9 $(ps -ef |grep -i jenkins | grep -i java | grep -iv grep | awk '{print $2}')
+kill -9 $(ps -ef |grep -i jenkins | grep -i java | grep -iv grep | awk '{print $2}'}
 
 
 ----------------------------------------------------------------------------------------------
